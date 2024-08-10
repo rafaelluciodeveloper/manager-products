@@ -1,0 +1,35 @@
+/* Layout flexível que ocupa a altura total da tela */
+.d-flex {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  background-color: #343a40;
+}
+
+.navbar .nav-link {
+  color: #ffffff;
+  margin-right: 15px;
+}
+
+.navbar .nav-link:hover {
+  color: #adb5bd;
+}
+
+.navbar .btn-danger {
+  margin-left: 15px;
+}
+
+.container {
+  flex-grow: 1;
+}
+
+/* Footer fixo no final da página */
+footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 10px 0;
+  text-align: center;
+}

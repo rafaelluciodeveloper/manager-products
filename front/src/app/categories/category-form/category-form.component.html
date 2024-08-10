@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="card p-4">
+    <h3 class="text-center mb-4">
+      {{ isEditMode ? "Edit Category" : "Create Category" }}
+    </h3>
+
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="code" class="form-label">Code</label>
+        <input
+          id="code"
+          type="text"
+          class="form-control"
+          formControlName="code"
+          placeholder="Enter category code"
+        />
+        <div
+          *ngIf="
+            categoryForm.get('code')?.invalid && categoryForm.get('code')?.touched
+          "
+          class="text-danger mt-2"
+        >
+          Code is required and must be less than 50 characters.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          id="description"
+          type="text"
+          class="form-control"
+          formControlName="description"
+          placeholder="Enter category description"
+        />
+        <div
+          *ngIf="
+            categoryForm.get('description')?.invalid &&
+            categoryForm.get('description')?.touched
+          "
+          class="text-danger mt-2"
+        >
+          Description is required and must be less than 255 characters.
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-primary me-2"
+          [disabled]="categoryForm.invalid"
+        >
+          {{ isEditMode ? "Update" : "Create" }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

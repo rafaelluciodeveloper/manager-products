@@ -1,0 +1,109 @@
+<div class="container mt-5">
+  <div class="card p-4">
+    <h3 class="text-center mb-4">
+      {{ isEditMode ? "Edit Product" : "Create Product" }}
+    </h3>
+    <div *ngIf="errorMessage" class="text-danger text-center mb-3">
+      {{ errorMessage }}
+    </div>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="code" class="form-label">Code</label>
+        <input
+          id="code"
+          type="text"
+          class="form-control"
+          formControlName="code"
+          placeholder="Enter product code"
+        />
+        <div
+          *ngIf="
+            productForm.get('code')?.invalid && productForm.get('code')?.touched
+          "
+          class="text-danger mt-2"
+        >
+          Code is required and must be less than 50 characters.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          id="description"
+          type="text"
+          class="form-control"
+          formControlName="description"
+          placeholder="Enter product description"
+        />
+        <div
+          *ngIf="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+          class="text-danger mt-2"
+        >
+          Description is required and must be less than 255 characters.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input
+          id="price"
+          type="text"
+          class="form-control"
+          formControlName="price"
+          mask="separator.2"
+          thousandSeparator="."
+          decimalMarker=","
+          prefix="R$ "
+          placeholder="Enter product price"
+        />
+        <div
+          *ngIf="
+            productForm.get('price')?.invalid && productForm.get('price')?.touched
+          "
+          class="text-danger mt-2"
+        >
+          Price is required and must be a non-negative number.
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="categoryId" class="form-label">Category</label>
+        <select
+          id="categoryId"
+          class="form-select"
+          formControlName="categoryId"
+        >
+          <option value="" disabled>Select a Category</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.description }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            productForm.get('categoryId')?.invalid &&
+            productForm.get('categoryId')?.touched
+          "
+          class="text-danger mt-2"
+        >
+          Category is required.
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-primary me-2"
+          [disabled]="productForm.invalid"
+        >
+          {{ isEditMode ? "Update" : "Create" }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

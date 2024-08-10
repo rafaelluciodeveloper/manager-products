@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <h3 class="text-center mb-4">Category Management</h3>
+
+  <div class="card p-4 mb-4">
+    <h5 class="card-title mb-3">Filter Categories</h5>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="categoryCode" class="form-label">Code</label>
+        <input
+          id="categoryCode"
+          type="text"
+          class="form-control"
+          placeholder="Enter code"
+          [(ngModel)]="filter.code"
+          (ngModelChange)="onFilterChange()"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="categoryDescription" class="form-label">Description</label>
+        <input
+          id="categoryDescription"
+          type="text"
+          class="form-control"
+          placeholder="Enter description"
+          [(ngModel)]="filter.description"
+          (ngModelChange)="onFilterChange()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <p class="text-muted mb-0">Total Categories: {{ categories.length }}</p>
+    </div>
+    <button class="btn btn-success" (click)="createCategory()">
+      <i class="bi bi-plus-lg"></i> Create New Category
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+      <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.code }}</td>
+        <td>{{ category.description }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm me-2" (click)="editCategory(category)">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteCategory(category.id)"
+          >
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li
+        class="page-item"
+        [class.disabled]="first"
+        (click)="paginationPrevious()"
+      >
+        <a class="page-link" href="#">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="first"
+          (click)="paginationNext()">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
