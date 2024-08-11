@@ -13,7 +13,7 @@ Este é um projeto full stack que combina um backend desenvolvido em Spring Boot
   - Spring Web
   - Lombok
   - Swagger
-- **MySQL** (dependendo do ambiente)
+- **MySQL**
 - **Maven**
 
 ### Frontend
